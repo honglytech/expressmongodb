@@ -1,6 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const routeCourses = require("./routes/courses");
 
 // Middleware
@@ -40,8 +44,8 @@ app.get("/", (req, res) => {
 
 // Connect to Database
 mongoose.connect(
-  "mongodb+srv://hongly:nDZgcGFOmC395g5p@nodejs-cluster-hzusj.mongodb.net/test?retryWrites=true&w=majority",
-  { useNewUrlParser: true },
+  "mongodb://hongly:vhvzx20h33QhYfwa@nodejs-cluster-shard-00-00-5aydg.mongodb.net:27017,nodejs-cluster-shard-00-01-5aydg.mongodb.net:27017,nodejs-cluster-shard-00-02-5aydg.mongodb.net:27017/test?ssl=true&replicaSet=nodejs-cluster-shard-0&authSource=admin&retryWrites=true&w=majority",
+  { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("connected to database!")
 );
 
