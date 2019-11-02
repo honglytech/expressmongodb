@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
 app.get("/", (req, res) => {
   res.send("Welcome to express tutorial!");
@@ -32,6 +33,13 @@ app.get("/api/courses", (req, res) => {
     { id: "20", course: "Master Microservices with Java", tag: "java" }
   ]);
 });
+
+// Connect to Database
+mongoose.connect(
+  "mongodb+srv://hongly:nDZgcGFOmC395g5p@nodejs-cluster-hzusj.mongodb.net/test?retryWrites=true&w=majority",
+  { useNewUrlParser: true },
+  () => console.log("connected to database!")
+);
 
 //app.listen(5000, () => console.log("Listening on port 5000"));
 
