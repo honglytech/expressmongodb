@@ -3,8 +3,19 @@ const router = express.Router();
 
 const Course = require("../models/Course");
 
+// router.get("/", (req, res) => {
+//   res.send("Hi, we are now at courses route");
+// });
+
 router.get("/", (req, res) => {
-  res.send("Hi, we are now at courses route");
+  Course.find()
+    .exec()
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(err => {
+      res.status(500).json({ message: err });
+    });
 });
 
 router.get("/1", (req, res) => {
@@ -20,12 +31,13 @@ router.post("/", (req, res) => {
   mycourse
     .save()
     .then(result => {
-      //res.json(result);
-      console.log(result);
+      res.status(201).json({
+        message: "Handling POST request to /api/courses - SUCCESS!",
+        createdCourse: result
+      });
     })
     .catch(err => {
-      //res.json({ message: err });
-      console.log(err);
+      res.status(500).json({ message: err });
     });
 });
 

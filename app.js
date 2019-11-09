@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+require("dotenv/config");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -44,7 +45,7 @@ app.get("/", (req, res) => {
 
 // Connect to Database
 mongoose.connect(
-  "mongodb://hongly:vhvzx20h33QhYfwa@nodejs-cluster-shard-00-00-5aydg.mongodb.net:27017,nodejs-cluster-shard-00-01-5aydg.mongodb.net:27017,nodejs-cluster-shard-00-02-5aydg.mongodb.net:27017/test?ssl=true&replicaSet=nodejs-cluster-shard-0&authSource=admin&retryWrites=true&w=majority",
+  process.env.DB_CONNECTION,
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => console.log("connected to database!")
 );
