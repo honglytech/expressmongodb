@@ -97,4 +97,29 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.patch("/:courseId", async (req, res) => {
+  try {
+    const id = req.params.courseId;
+    const updatedCourse = await Course.updateOne(
+      { _id: id },
+      {
+        $set: { course: req.body.course }
+      }
+    );
+    res.status(200).json(updatedCourse);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+
+router.delete("/:courseId", async (req, res) => {
+  try {
+    const id = req.params.courseId;
+    const removedCourse = await Course.remove({ _id: id });
+    res.status(200).json(removedCourse);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+
 module.exports = router;
